@@ -23,19 +23,20 @@
 
     - name: Show Ansible version
       debug:
-        var: ansible_version.stdout
+        var: ansible_version.stdout_lines
 
-    - name: Generate SSH key (if not exists)
+    - name: Generate SSH key for shivanitejale4 (if not exists)
+      become: true
+      become_user: shivanitejale4
       openssh_keypair:
-        path: /root/.ssh/id_rsa
+        path: /home/shivanitejale4/.ssh/id_rsa
         type: rsa
         size: 2048
         state: present
 
-    - name: Copy SSH key to remote host
+    - name: Ensure public key is in authorized_keys
       authorized_key:
-        user: shivani
+        user: shivanitejale4
         state: present
-        key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+        key: "{{ lookup('file', '/home/shivanitejale4/.ssh/id_rsa.pub') }}"
         manage_dir: yes
-      delegate_to: 34.66.40.224
