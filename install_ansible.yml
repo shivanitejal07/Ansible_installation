@@ -38,4 +38,4 @@
         state: present
         key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
         manage_dir: yes
-      delegate_to: 34.28.212.0
+      delegate_to: 34.66.40.224
